@@ -1,4 +1,15 @@
+(* You aslso need MessageWithSnap in order to use this script *)
+
 using terms from application "Messages"
+	
+	on run_script(_scriptName)
+		tell application "Finder"
+			set _myPath to container of (path to me) as text
+		end tell
+		
+		run script (alias (_myPath & _scriptName))
+	end run_script
+	
 	
 	-- handler to respond to all incoming messages.
 	on runRemoteControl(theMessage, theBuddyName)
@@ -8,7 +19,8 @@ using terms from application "Messages"
 		set theResponse to ""
 		if (theMessage is "yo") and theBuddyName is "Daniele Ciriello" then
 			
-			set theResponse to "bitch"
+			-- run script file "MessageWithSnap.scpt" of folder of (file (path to me))
+			run_script("MessageWithSnap.scpt")
 			
 		end if
 		
