@@ -1,4 +1,4 @@
-(* You aslso need MessageWithSnap in order to use this script *)
+(* You aslso need MessageWithSnap in order to use this script, then place this file and  MessageWithSnap in your iChat scripts folder and select this file from iMessage's Applescript manager settings*)
 
 using terms from application "Messages"
 	
@@ -14,16 +14,14 @@ using terms from application "Messages"
 	-- handler to respond to all incoming messages.
 	on runRemoteControl(theMessage, theBuddyName)
 		
-		(*-- use default "unknown" command, just in case.
-		set theResponse to "Unknown command."*)
+		(*-- use default "" because I don't know if needed*)
 		set theResponse to ""
-		if (theMessage is "yo") and theBuddyName is "Daniele Ciriello" then
+		if (theMessage is "snapshot") and theBuddyName is "Daniele Ciriello" then
 			
-			-- run script file "MessageWithSnap.scpt" of folder of (file (path to me))
-			run_script("MessageWithSnap.scpt")
+			run_script("MessageWithSnapWithData.scpt") -- remove WithData to make it work
+			
 			
 		end if
-		
 		return theResponse
 	end runRemoteControl
 	
