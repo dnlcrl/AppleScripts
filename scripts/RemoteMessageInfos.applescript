@@ -1,4 +1,7 @@
-(* You aslso need MessageWithSnap in order to use this script, then place this file and  MessageWithSnap in your iChat scripts folder and select this file from iMessage's Applescript manager settings*)
+(*	to use this script you also need:
+		MessageWithSnap.scpt
+		MessageWithPublicIP.scpt
+	place all files in your iChat scripts folder and select this file from iMessage's Applescript manager settings*)
 
 using terms from application "Messages"
 	
@@ -14,12 +17,19 @@ using terms from application "Messages"
 	-- handler to respond to all incoming messages.
 	on runRemoteControl(theMessage, theBuddyName)
 		
-		(*-- use default "" because I don't know if needed*)
+		(*-- use default "unknown" command, just in case.
+		set theResponse to "Unknown command."*)
 		set theResponse to ""
-		if (theMessage is "snapshot") and theBuddyName is "Daniele Ciriello" then
-			
-			run_script("MessageWithSnapWithData.scpt") -- remove WithData to make it work
-			
+		if theBuddyName is "Daniele Ciriello" then -- check if the message is from trusted user
+			if (theMessage is "snapshot") then
+				
+				run_script("MessageWithSnapPrivate.scpt") -- remove Private to make it work
+				
+			else if (theMessage is "ip") then
+				
+				run_script("MessageWithPublicIPPrivate.scpt") -- remove Private to make it work
+				
+			end if
 			
 		end if
 		return theResponse
